@@ -1,8 +1,21 @@
-/* @font-face {
-  font-family: "";
-  src: url("../Fonts/") format("woff"), 
-  url("../Fonts/") format("truetype");
+@font-face {
+  font-family: "Libre Baskerville Regular";
+  src: local("LibreBaskerville-Regular"),
+    url("../../Fonts/libre-baskerville.ttf") format("truetype"),
+    url("../../Fonts/libre-baskerville.woff") format("woff");
+  font-weight: 400;
   font-style: normal;
   font-weight: normal;
   text-rendering: optimizeLegibility;
-} */
+}
+
+@font-face {
+  font-family: "Libre Baskerville Bold";
+  src: local("LibreBaskerville-Bold"),
+    url("../../Fonts/libre-baskerville-bold.ttf") format("truetype"),
+    url("../../Fonts/libre-baskerville-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
