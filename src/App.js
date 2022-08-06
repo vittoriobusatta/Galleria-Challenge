@@ -3,9 +3,10 @@ import "./Assets/Styles/Reset.css";
 import { createGlobalStyle } from "styled-components";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import Header from "./Components/Header";
+import Slideshow from "./Components/Slideshow";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -39,11 +40,11 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
   }
   ::-moz-selection {
-    background: #CDEDF6;
+    background: #ECE2D0;
     text-shadow: none;
   }
   ::selection {
-    background: #CDEDF6;
+    background: #ECE2D0;
     text-shadow: none;
   }
   ::-webkit-scrollbar{
@@ -76,10 +77,16 @@ function App() {
   }, []);
 
   return (
+
     <>
       <GlobalStyle />
-      <Header />
-      <Home paintingsData={paintingsData} />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home paintingsData={paintingsData} />} />
+          <Route path="/slideshow" element={<Slideshow paintingsData={paintingsData} />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

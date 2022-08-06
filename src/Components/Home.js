@@ -1,7 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import '../Assets/Styles/Grid.css';
-import { libreBaskervilleRegular, libreBaskervilleBold } from "../Common/Common";
+import "../Assets/Styles/Grid.css";
+import {
+  libreBaskervilleRegular,
+  libreBaskervilleBold,
+} from "../Common/Common";
 
 const Container = styled.section`
   height: auto;
@@ -18,7 +22,10 @@ const Grid = styled.ul`
   gap: 40px;
   & li {
     position: relative;
-    cursor: pointer;
+    & a {
+      height: 100%;
+      width: 100%;
+    }
     & img {
       transition: all 0.3s ease-in-out;
       height: 100%;
@@ -35,6 +42,7 @@ const Grid = styled.ul`
     height: 17rem;
     max-height: 170px;
     width: 100%;
+    pointer-events: none;
     background-image: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0.0001) 0%,
@@ -59,7 +67,7 @@ const CardInfo = styled.div`
     font-size: max(2.4rem, 18px);
     line-height: 2.9rem;
     margin-bottom: 0.7rem;
-    font-family:${libreBaskervilleBold};
+    font-family: ${libreBaskervilleBold};
     font-weight: 700;
   }
 
@@ -67,7 +75,7 @@ const CardInfo = styled.div`
     opacity: 0.75;
     font-size: 13px;
     line-height: 17px;
-    font-family:${libreBaskervilleRegular};
+    font-family: ${libreBaskervilleRegular};
     font-weight: 400;
   }
 `;
@@ -77,15 +85,17 @@ function Home({ paintingsData }) {
     <Container>
       <Grid>
         {paintingsData.map((info, index) => (
-          <li key={index}>
-            <img
-              src={`${process.env.PUBLIC_URL}${info.images.thumbnail}`}
-              alt={info.name}
-            />
-            <CardInfo>
-              <h2>{info.name}</h2>
-              <h3>{info.artist.name}</h3>
-            </CardInfo>
+          <li key={index} number={index} infoPainting={info}>
+            <Link to={"/slideshow"}>
+              <img
+                src={`${process.env.PUBLIC_URL}${info.images.thumbnail}`}
+                alt={info.name}
+              />
+              <CardInfo>
+                <h2>{info.name}</h2>
+                <h3>{info.artist.name}</h3>
+              </CardInfo>
+            </Link>
           </li>
         ))}
       </Grid>
