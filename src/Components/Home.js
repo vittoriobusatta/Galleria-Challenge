@@ -81,12 +81,13 @@ const CardInfo = styled.div`
 `;
 
 function Home({ paintingsData }) {
+
   return (
     <Container>
       <Grid>
         {paintingsData.map((info, index) => (
-          <li key={index} number={index} infoPainting={info}>
-            <Link to={"/slideshow"}>
+          <li key={index} infoPainting={info}>
+            <Link to={`/slideshow?=number${index}`}>
               <img
                 src={`${process.env.PUBLIC_URL}${info.images.thumbnail}`}
                 alt={info.name}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { libreBaskervilleBold } from "../Common/Common";
 import Arrow from "./Arrow";
 import PaintingPage from "./PaintingPage";
 
@@ -12,14 +13,17 @@ const Container = styled.section`
 
 const Slide = styled.div`
   height: calc(100% - 96px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 40px 40px 0;
 `;
 
 const SlideContent = styled.div`
-height: 100%;
+  height: 100%;
   width: 100%;
+  display: inline-flex;
+  overflow: hidden;
 `;
 
 const SlideFooter = styled.div`
@@ -29,11 +33,11 @@ const SlideFooter = styled.div`
   right: 0;
   max-height: 96px;
   width: 100%;
-  background-color: #c1c1c1;
   padding: 25px 41px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-top: solid 1px #c1c1c1;
 `;
 
 const Info = styled.div`
@@ -46,6 +50,7 @@ const Info = styled.div`
     line-height: 22px;
     color: #000000;
     margin-bottom: 8px;
+    font-family: ${libreBaskervilleBold};
   }
   & h3 {
     font-style: normal;
@@ -55,6 +60,7 @@ const Info = styled.div`
     color: #000000;
     mix-blend-mode: normal;
     opacity: 0.75;
+    font-family: ${libreBaskervilleBold};
   }
 `;
 
@@ -65,24 +71,65 @@ export const Buttons = styled.div`
   align-items: center;
   column-gap: 30px;
 `;
+export const Bar = styled.div`
+  position: absolute;
+  height: 2px;
+  background: #000;
+  top: -1px;
+  left: 0;
+`;
 
 function Slideshow({ paintingsData }) {
+  let numberSlide = Number(window.location.search.replace("?=number", ""));
+  const [counter, setCounter] = useState(numberSlide);
+  const [currentPainting, setCurrentPainting] = useState(
+    paintingsData[counter]
+  );
+
+  useEffect(() => {
+    setCurrentPainting(paintingsData[counter]);
+    
+  }, [counter, paintingsData]);
+
+  const ProgressBar = () => {
+    return (
+      <Bar
+        style={{
+          width: `${(counter + 1) * 100 / paintingsData.length}%`,
+        }}
+      />
+    );
+  }
+ 
+
+
   return (
     <Container>
       <Slide>
         <SlideContent>
           {paintingsData.map((items, index) => (
-            <PaintingPage key={index} painting={items} />
+            <PaintingPage key={index} painting={items} counter={counter} />
           ))}
         </SlideContent>
         <SlideFooter>
+          <ProgressBar/>
           <Info>
-            <h2>ADdzd</h2>
-            <h3>cfcd</h3>
+            <h2>{currentPainting.name}</h2>
+            <h3>{currentPainting.artist.name}</h3>
           </Info>
           <Buttons>
-            <Arrow direction="left" />
-            <Arrow direction="right" />
+            <Arrow
+              counter={counter}
+              setCounter={setCounter}
+              paintingsData={paintingsData}
+              direction="back"
+            />
+            <Arrow
+              counter={counter}
+              setCounter={setCounter}
+              paintingsData={paintingsData}
+              direction="next"
+            />
           </Buttons>
         </SlideFooter>
       </Slide>

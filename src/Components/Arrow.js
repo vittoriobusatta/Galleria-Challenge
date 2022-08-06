@@ -23,10 +23,20 @@ const ArrowBack = styled(ArrowLeft)`
   }
 `;
 
-function Arrow({ direction, handleClick }) {
+function Arrow({ direction, counter, setCounter, paintingsData }) {
+
+
+  function handleClickBack() {
+    if (counter > 0) setCounter(counter - 1);
+  }
+
+  function handleClickNext() {
+    if (counter < paintingsData.length - 1) setCounter(counter + 1);
+  }
+
   return (
-    <Container onClick={handleClick}>
-      {direction === "right" ? <ArrowNext /> : <ArrowBack />}
+    <Container >
+      {direction === "next" ? <ArrowNext onClick={handleClickNext}/> : <ArrowBack onClick={handleClickBack}/>}
     </Container>
   );
 }
