@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    ::-webkit-scrollbar{
+      display: none;
+    }
     ::-moz-selection {
       background: #ECE2D0;
       text-shadow: none;
@@ -22,12 +25,9 @@ const GlobalStyle = createGlobalStyle`
       background: #ECE2D0;
       text-shadow: none;
     }
-    ::-webkit-scrollbar{
-      display: none;
-    }
-    @media only screen and (min-width : 1824px) {
+    /* @media only screen and (min-width : 1824px) {
       font-size: 70%;
-    } 
+    }  */
     @media screen and (max-width: 1400px) {
       font-size: 58%;
     }

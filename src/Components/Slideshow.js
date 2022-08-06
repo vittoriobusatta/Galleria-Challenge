@@ -8,7 +8,7 @@ const Container = styled.section`
   height: calc(100vh - 129px);
   width: auto;
   display: flex;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const Slide = styled.div`
@@ -22,8 +22,8 @@ const Slide = styled.div`
 const SlideContent = styled.div`
   height: 100%;
   width: 100%;
-  display: inline-flex;
-  overflow: hidden;
+  display: flex;
+  /* overflow: hidden; */
 `;
 
 const SlideFooter = styled.div`
@@ -34,6 +34,7 @@ const SlideFooter = styled.div`
   max-height: 96px;
   width: 100%;
   padding: 25px 41px;
+  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;

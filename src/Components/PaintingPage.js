@@ -7,31 +7,37 @@ import {
 } from "../Common/Common";
 
 const Container = styled.section`
-  display: inline-block;
-  width: 100%;
+  width: 100vw;
   transition: transform 0.5s;
 `;
-
 
 const Content = styled.div`
   width: 100%;
   height: 100%;
-  min-width: 100vw;
+  display: inline-flex;
+  justify-content: space-between;
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
 `;
 const Left = styled.div`
   height: 100%;
-  width: auto;
+  width: 55%;
   max-height: 624px;
   max-width: 855px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr) 0.5fr repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr) 0.8fr repeat(5, 1fr);
   grid-template-rows: repeat(8, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 1.4fr repeat(3, 1fr) 0.2fr;
+    grid-template-rows: repeat(4, 1fr);
+    width: fit-content;
+  }
 `;
 
 const ArtistImage = styled.div`
-  grid-area: 7 / 7 / 9 / 10;
+  grid-area: 7 / 8 / 9 / 10;
   margin-left: 30px;
   height: 128px;
   width: 128px;
@@ -42,10 +48,11 @@ const ArtistImage = styled.div`
   }
 `;
 const Hero = styled.div`
-  grid-area: 1 / 1 / 8 / 7;
-  /* min-width: 475px; */
+  grid-area: 1 / 1 / 8 / 8;
+  /* min-width: 300px; */
   & img {
     height: 100%;
+    width: 100%;
     width: 100%;
     object-fit: cover;
   }
@@ -53,10 +60,10 @@ const Hero = styled.div`
 const Title = styled.div`
   height: fit-content;
   width: auto;
-  grid-area: 1 / 6 / 4 / 13;
+  grid-area: 1 / 7 / 4 / 13;
   background: #fff;
-  padding-left: 65px;
-  padding-bottom: 67px;
+  padding-left: 6.5rem;
+  padding-bottom: 6.7rem;
   max-width: 445px;
   & h1 {
     font-style: normal;
@@ -77,13 +84,66 @@ const Title = styled.div`
   }
 `;
 
+const Right = styled.div`
+  height: 100%;
+  width: 45%;
+  max-height: 571px;
+  min-width: 476px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+`;
+const RightContent = styled.div`
+  height: 100%;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr) 1.5fr repeat(10, 1fr);
+  padding-right: 80px;
+
+  & h1 {
+    grid-area: 1 / 1 / 5 / 2;
+    font-style: normal;
+    font-weight: 700;
+    font-size: max(20rem, 100px);
+    line-height: max(15rem, 100px);
+    color: #f3f3f3;
+    font-family: ${libreBaskervilleBold};
+  }
+  & p {
+    grid-area: 4 / 1 / 13 / 2;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 28px;
+    color: #7d7d7d;
+    max-width: 350px;
+    font-family: ${libreBaskervilleBold};
+  }
+`;
+
+const Source = styled.a`
+  grid-area: 14 / 1 / 15 / 2;
+  height: auto;
+  width: auto;
+  font-family: ${libreBaskervilleBold};
+  font-style: normal;
+  font-weight: 700;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 1.92857px;
+  text-decoration-line: underline;
+  color: #7d7d7d;
+  text-transform: uppercase;
+`;
+
 function PaintingPage({ painting, counter }) {
   function ResizeImage(images, windowSize) {
     return windowSize.width >= 992 ? images.large : images.small;
   }
 
   return (
-    <Container style={{transform: `translateX(${counter  * -100}%)`}}>
+    <Container style={{ transform: `translateX(${counter * -100}%)` }}>
       <Content>
         <Left>
           <Hero>
@@ -100,6 +160,13 @@ function PaintingPage({ painting, counter }) {
             <h3>{painting.artist.name}</h3>
           </Title>
         </Left>
+        <Right>
+          <RightContent>
+            <h1>{painting.year}</h1>
+            <p>{painting.description}</p>
+            <Source href={painting.source}>Go To Source</Source>
+          </RightContent>
+        </Right>
       </Content>
 
       {/* <div className="painting-page__wrapper">
