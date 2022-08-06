@@ -11,6 +11,9 @@ const Container = styled.section`
   height: auto;
   width: 100%;
   padding: 40px;
+  @media screen and (max-width: 576px) {
+    padding: 24px;
+  }
 `;
 const Grid = styled.ul`
   height: 100%;
@@ -18,8 +21,10 @@ const Grid = styled.ul`
   display: grid;
   height: auto;
   width: auto;
-  grid-gap: 40px;
   gap: 40px;
+  @media screen and (max-width: 576px) {
+    gap: 24px;
+  }
   & li {
     position: relative;
     & a {
@@ -33,6 +38,7 @@ const Grid = styled.ul`
       object-fit: cover;
     }
   }
+  
 
   li:after {
     position: absolute;

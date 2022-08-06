@@ -21,6 +21,9 @@ const Content = styled.div`
   flex-direction: row;
   border-bottom: solid 1px #f3f3f3;
   padding-bottom: 40px;
+  @media screen and (max-width: 576px) {
+    padding-bottom: 24px;
+  }
 `;
 const Logo = styled.div`
   height: auto;
@@ -28,9 +31,14 @@ const Logo = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  min-width: 170px;
   & svg {
-    height: 48px;
-width: 169.55999755859375px;
+    height: 4.8rem;
+    width: 16.9rem;
+    max-height: 48px;
+    max-width: 169px;
+    min-height: 32px;
+    min-width: 113px;
   }
 `;
 const SlideShow = styled.div`
@@ -41,20 +49,22 @@ const SlideShow = styled.div`
   align-items: center;
   & span {
     font-family: ${libreBaskervilleBold};
-    font-style: normal;
-    font-weight: 700;
     text-transform: uppercase;
-    text-align: right;
     font-style: normal;
     font-weight: 700;
-    font-size: 12px;
+    font-size: max(1.2rem, 9px);
     line-height: 15px;
     text-align: right;
-    letter-spacing: 2.57143px;
+    letter-spacing: max(0.25rem, 1.9px);
+    letter-spacing: 2.5px;
     color: #7d7d7d;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     &:hover {
+    }
+
+    @media screen and (max-width: 576px) {
+      letter-spacing: 1.92857px;
     }
   }
 `;

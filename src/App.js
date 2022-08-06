@@ -12,6 +12,19 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    ::-moz-selection {
+      background: #ECE2D0;
+      text-shadow: none;
+    }
+    ::selection {
+      background: #ECE2D0;
+      text-shadow: none;
+    }
+    ::-webkit-scrollbar{
+      display: none;
+    }
     @media only screen and (min-width : 1824px) {
       font-size: 70%;
     } 
@@ -39,23 +52,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: #fff;
     font-size: 1.6rem;
   }
-  ::-moz-selection {
-    background: #ECE2D0;
-    text-shadow: none;
-  }
-  ::selection {
-    background: #ECE2D0;
-    text-shadow: none;
-  }
-  ::-webkit-scrollbar{
-    width: 10px;
-    background-color: #FAF7EE;
-  }
-    
-  ::-webkit-scrollbar-thumb{
-    background: #D4CEBD;
-    border-radius: 15px;
-  }
+
+  
 `;
 
 function App() {
@@ -77,14 +75,16 @@ function App() {
   }, []);
 
   return (
-
     <>
       <GlobalStyle />
       <BrowserRouter>
         <Header />
         <Routes>
           <Route path="/" element={<Home paintingsData={paintingsData} />} />
-          <Route path="/slideshow" element={<Slideshow paintingsData={paintingsData} />} />
+          <Route
+            path="/slideshow"
+            element={<Slideshow paintingsData={paintingsData} />}
+          />
         </Routes>
       </BrowserRouter>
     </>
