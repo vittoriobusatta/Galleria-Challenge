@@ -195,6 +195,8 @@ function PaintingPage({ painting, counter }) {
     return windowSize.width >= 992 ? images.large : images.small;
   }
 
+
+
   return (
     <Container
       width={windowSize.width}

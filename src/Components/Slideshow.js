@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { libreBaskervilleBold } from "../Common/Common";
 import Arrow from "./Arrow";
 import PaintingPage from "./PaintingPage";
+import { useLocation } from "react-router-dom";
+
 
 const Container = styled.section`
   height: calc(100% - 129px);
@@ -44,6 +46,7 @@ const SlideFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   border-top: solid 1px #c1c1c1;
+  user-select: none;
 `;
 
 const Info = styled.div`
@@ -91,10 +94,18 @@ function Slideshow({ paintingsData }) {
   const [currentPainting, setCurrentPainting] = useState(
     paintingsData[counter]
   );
+  const routePath = useLocation();
+
+  const onTop = () => {
+    window.scrollTo(0, 0, "smooth");
+  }
 
   useEffect(() => {
     setCurrentPainting(paintingsData[counter]);
-  }, [counter, paintingsData]);
+    setTimeout(() => {
+      onTop();
+    } , 400);
+  }, [counter, paintingsData, routePath]);
 
   const ProgressBar = () => {
     return (
@@ -105,6 +116,7 @@ function Slideshow({ paintingsData }) {
       />
     );
   };
+
 
   return (
     <Container>
