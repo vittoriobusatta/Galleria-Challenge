@@ -5,25 +5,30 @@ import Arrow from "./Arrow";
 import PaintingPage from "./PaintingPage";
 
 const Container = styled.section`
-  height: calc(100vh - 129px);
-  width: auto;
-  display: flex;
+  height: calc(100% - 129px);
   /* overflow: hidden; */
 `;
 
 const Slide = styled.div`
   height: calc(100% - 96px);
-  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 40px 40px 0;
+
+  @media screen and (max-width: 1224px) {
+    padding: 35px 35px 0;
+  }
+  @media screen and (max-width: 992px) {
+    height: auto;
+    margin-bottom: 96px;
+  }
 `;
 
 const SlideContent = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  /* overflow: hidden; */
+  overflow: hidden;
 `;
 
 const SlideFooter = styled.div`
@@ -89,20 +94,17 @@ function Slideshow({ paintingsData }) {
 
   useEffect(() => {
     setCurrentPainting(paintingsData[counter]);
-    
   }, [counter, paintingsData]);
 
   const ProgressBar = () => {
     return (
       <Bar
         style={{
-          width: `${(counter + 1) * 100 / paintingsData.length}%`,
+          width: `${((counter + 1) * 100) / paintingsData.length}%`,
         }}
       />
     );
-  }
- 
-
+  };
 
   return (
     <Container>
@@ -113,7 +115,7 @@ function Slideshow({ paintingsData }) {
           ))}
         </SlideContent>
         <SlideFooter>
-          <ProgressBar/>
+          <ProgressBar />
           <Info>
             <h2>{currentPainting.name}</h2>
             <h3>{currentPainting.artist.name}</h3>

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useWindowSize } from "../Tools/Utils";
 import {
   libreBaskervilleRegular,
   libreBaskervilleBold,
 } from "../Common/Common";
 
-const Container = styled.section`
-  width: 100vw;
+const Container = styled.div`
   transition: transform 0.5s;
+  width: auto;
+  height: 100%;
+  min-width: calc(${(props) => props.width}px - 80px);
+
+  @media screen and (max-width: 1224px) {
+    min-width: calc(${(props) => props.width}px - 70px);
+  }
 `;
 
 const Content = styled.div`
@@ -28,11 +33,14 @@ const Left = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr) 0.8fr repeat(5, 1fr);
   grid-template-rows: repeat(8, 1fr);
+  @media screen and (max-width: 1224px) {
+    width: 100%;
+  }
 
   @media screen and (max-width: 992px) {
-    grid-template-columns: 1.4fr repeat(3, 1fr) 0.2fr;
+    grid-template-columns: repeat(2, 1fr) repeat(2, 0.5fr);
     grid-template-rows: repeat(4, 1fr);
-    width: fit-content;
+    max-width: none;
   }
 `;
 
@@ -46,15 +54,25 @@ const ArtistImage = styled.div`
     width: 100%;
     object-fit: cover;
   }
+  @media screen and (max-width: 992px) {
+    /* margin-left: 0; */
+    padding-left: 0;
+    grid-area: 3 / 4 / 4 / 5;
+  }
 `;
 const Hero = styled.div`
   grid-area: 1 / 1 / 8 / 8;
-  /* min-width: 300px; */
   & img {
     height: 100%;
     width: 100%;
     width: 100%;
     object-fit: cover;
+  }
+  @media screen and (max-width: 992px) {
+    /* min-width: 650px; */
+    max-width: 600px;
+    min-height: 560px;
+    grid-area: 1 / 1 / 5 / 4;
   }
 `;
 const Title = styled.div`
@@ -72,6 +90,9 @@ const Title = styled.div`
     font-size: max(5.6rem, 24px);
     line-height: 64px;
     font-family: ${libreBaskervilleBold};
+    @media screen and (max-width: 992px) {
+      line-height: 56px;
+    }
   }
   & h3 {
     font-style: normal;
@@ -82,36 +103,42 @@ const Title = styled.div`
     mix-blend-mode: normal;
     opacity: 0.75;
   }
+  @media screen and (max-width: 1224px) {
+    padding-left: 3.5rem;
+  }
+  @media screen and (max-width: 992px) {
+    grid-area: 1 / 2 / 3 / 5;
+    padding-left: 6.5rem;
+  }
 `;
 
 const Right = styled.div`
   height: 100%;
   width: 45%;
   max-height: 571px;
-  min-width: 476px;
   display: flex;
   justify-content: center;
-  padding-top: 20px;
+  @media screen and (max-width: 1224px) {
+    justify-content: flex-end;
+  }
 `;
 const RightContent = styled.div`
   height: 100%;
   width: fit-content;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr) 1.5fr repeat(10, 1fr);
-  padding-right: 80px;
+  grid-template-rows: repeat(4, 1fr) 1.5fr repeat(10, 1fr);
 
   & h1 {
-    grid-area: 1 / 1 / 5 / 2;
+    grid-area: 1 / 1 / 4 / 2;
     font-style: normal;
     font-weight: 700;
     font-size: max(20rem, 100px);
-    line-height: max(15rem, 100px);
     color: #f3f3f3;
     font-family: ${libreBaskervilleBold};
   }
   & p {
-    grid-area: 4 / 1 / 13 / 2;
+    grid-area: 5 / 1 / 13 / 2;
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -119,6 +146,12 @@ const RightContent = styled.div`
     color: #7d7d7d;
     max-width: 350px;
     font-family: ${libreBaskervilleBold};
+  }
+
+  @media screen and (max-width: 992px) {
+    width: 100%;
+    height: fit-content;
+    display: block;
   }
 `;
 
@@ -138,17 +171,40 @@ const Source = styled.a`
 `;
 
 function PaintingPage({ painting, counter }) {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   function ResizeImage(images, windowSize) {
     return windowSize.width >= 992 ? images.large : images.small;
   }
 
   return (
-    <Container style={{ transform: `translateX(${counter * -100}%)` }}>
+    <Container
+      width={windowSize.width}
+      style={{ transform: `translateX(${counter * -100}%)` }}
+    >
       <Content>
         <Left>
           <Hero>
             <img
-              src={ResizeImage(painting.images.hero, useWindowSize())}
+              src={ResizeImage(painting.images.hero, windowSize)}
               alt={painting.name}
             />
           </Hero>
@@ -168,34 +224,6 @@ function PaintingPage({ painting, counter }) {
           </RightContent>
         </Right>
       </Content>
-
-      {/* <div className="painting-page__wrapper">
-        <div className="painting-page__image">
-          <Hero
-            src={ResizeImage(painting.images.hero, useWindowSize())}
-            alt={painting.name}
-          />
-          <button>VIEW IMAGE</button>
-        </div>
-        <section className="painting-page__label">
-          <header className="painting-info">
-            <h1>{painting.name}</h1>
-            <h2>{painting.artist.name}</h2>
-          </header>
-          <div className="artist-image">
-            <img src={painting.artist.image} alt={painting.name} />
-          </div>
-        </section>
-        <section className="painting-page__description">
-          <span className="painting-year">{painting.year}</span>
-          <div className="wrapper-info">
-            <p className="painting-description">{painting.description}</p>
-            <a className="painting-link-go-to-source" href={painting.source}>
-              GO TO SOURCE
-            </a>
-          </div>
-        </section>
-      </div> */}
     </Container>
   );
 }
