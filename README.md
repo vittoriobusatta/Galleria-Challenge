@@ -1,3 +1,3 @@
 ## Preview
 
-[Live](https://galleria-ten.vercel.app/)
+Live Website ==> [https://galleria-ten.vercel.app/](https://galleria-ten.vercel.app/)
