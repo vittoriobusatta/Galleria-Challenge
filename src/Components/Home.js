@@ -71,7 +71,7 @@ const CardInfo = styled.div`
 
   & h2 {
     font-size: max(2.4rem, 18px);
-    line-height: 2.9rem;
+    line-height: 29.76px;
     margin-bottom: 0.7rem;
     font-family: ${libreBaskervilleBold};
     font-weight: 700;

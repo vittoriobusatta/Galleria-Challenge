@@ -60,8 +60,10 @@ const SlideShow = styled.div`
     color: #7d7d7d;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    &:hover {
-      color: #000000;
+    @media screen and (min-width: 992px) {
+      &:hover {
+        color: #000000;
+      }
     }
 
     @media screen and (max-width: 576px) {
