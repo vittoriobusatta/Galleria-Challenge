@@ -23,9 +23,9 @@ const Container = styled.div`
 `;
 
 function Arrow({ direction, counter, setCounter, paintingsData }) {
+  
   useEffect(() => {
     function checkKey(e) {
-      document.onkeydown = checkKey;
       e = e || window.event;
       if (e.keyCode === 37 && counter > 0) {
         setCounter(counter - 1);

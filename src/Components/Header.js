@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { libreBaskervilleBold } from "../Common/Common";
 
@@ -47,7 +47,7 @@ const SlideShow = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  & span {
+  & a {
     font-family: ${libreBaskervilleBold};
     text-transform: uppercase;
     font-style: normal;
@@ -71,6 +71,18 @@ const SlideShow = styled.div`
 `;
 
 function Header() {
+  const [action, setAction] = useState("Start");
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  useEffect(() => {
+    setUpSlideshow();
+  }, [location]);
+
+  function setUpSlideshow() {
+    const action = currentPath === "/" ? "Start" : "Stop";
+    setAction(action);
+  }
   return (
     <Container>
       <Content>
@@ -91,7 +103,11 @@ function Header() {
           </Link>
         </Logo>
         <SlideShow>
-          <span>Start Slideshow</span>
+          {currentPath === "/" ? (
+            <Link to="/slideshow">{action} slideshow</Link>
+          ) : (
+            <Link to="/">{action} slideshow</Link>
+          )}
         </SlideShow>
       </Content>
     </Container>
