@@ -131,7 +131,32 @@ const GalleryContent = styled.div`
 `;
 const CloseButton = styled.div`
   height: auto;
-  width: fit-content;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+
+  & button {
+    height: auto;
+    width: auto;
+    margin-bottom: 4.1rem;
+    background-color: transparent;
+    border: none;
+    font-family: ${libreBaskervilleBold};
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #ffffff;
+
+    &:hover {
+      mix-blend-mode: normal;
+      opacity: 0.25;
+    }
+
+  }
 `;
 
 const Overlay = styled.section`

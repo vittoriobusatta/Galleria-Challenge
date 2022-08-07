@@ -155,6 +155,11 @@ const ViewButton = styled.div`
   padding: 16px 14px;
   cursor: pointer;
 
+  &:hover {
+    mix-blend-mode: normal;
+  background: rgba(255, 255, 255, 0.25)
+  }
+
   @media screen and (max-width: 992px) {
     grid-area: 4 / 1 / 8 / 3;
   }
@@ -193,7 +198,6 @@ const Right = styled.div`
   }
 `;
 const RightContent = styled.div`
-  height: 100%;
   width: fit-content;
   display: grid;
   grid-template-columns: 1fr;
@@ -234,12 +238,14 @@ const RightContent = styled.div`
     font-size: 14px;
     line-height: 28px;
     color: #7d7d7d;
+    max-width: 450px;
     font-family: ${libreBaskervilleBold};
     @media screen and (max-width: 992px) {
       grid-area: 2 / 2 / 5 / 3;
     }
     @media screen and (max-width: 576px) {
       grid-area: 2 / 1 / 6 / 3;
+      max-width: 100%;
     }
   }
 `;
