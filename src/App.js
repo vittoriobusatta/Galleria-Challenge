@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home";
 import Header from "./Components/Header";
 import Slideshow from "./Components/Slideshow";
+import Loader from "./Components/Loader";
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -69,9 +70,16 @@ function App() {
 
   useEffect(() => {
     fetchPaintingsData();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
-  return (
+  const [isLoading, setIsLoading] = useState(true);
+
+  return isLoading ? (
+    <Loader />) 
+    : (
     <>
       <GlobalStyle />
       <BrowserRouter>
