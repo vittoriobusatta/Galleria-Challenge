@@ -102,12 +102,55 @@ export const Bar = styled.div`
   left: 0;
 `;
 
+const ShowGallery = styled.section`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const GalleryContent = styled.div`
+  position: relative;
+  height: auto;
+  width: fit-content;
+  z-index: 20;
+  margin: 4.9rem;
+  @media screen and (max-width: 576px) {
+    margin: 24px;
+  }
+  & img {
+    max-height: 770px;
+    height: auto;
+    width: 100%;
+    max-width: fit-content;
+    object-fit: cover;
+  }
+`;
+const CloseButton = styled.div`
+  height: auto;
+  width: fit-content;
+`;
+
+const Overlay = styled.section`
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.85);
+`;
+
 function Slideshow({ paintingsData }) {
   let numberSlide = Number(window.location.search.replace("?=number", ""));
   const [counter, setCounter] = useState(numberSlide);
   const [currentPainting, setCurrentPainting] = useState(
     paintingsData[counter]
   );
+  const [showGallery, setShowGallery] = useState(false);
   const routePath = useLocation();
 
   const onTop = () => {
@@ -136,7 +179,14 @@ function Slideshow({ paintingsData }) {
       <Slide>
         <SlideContent>
           {paintingsData.map((items, index) => (
-            <PaintingPage key={index} painting={items} counter={counter} />
+            <PaintingPage
+              id={`painting${index}`}
+              key={index}
+              painting={items}
+              counter={counter}
+              currentPainting={currentPainting}
+              setShowGallery={setShowGallery}
+            />
           ))}
         </SlideContent>
         <SlideFooter>
@@ -160,6 +210,25 @@ function Slideshow({ paintingsData }) {
             />
           </Buttons>
         </SlideFooter>
+        {showGallery && (
+          <ShowGallery>
+            <GalleryContent>
+              <CloseButton>
+                <button onClick={() => setShowGallery(false)}>Close</button>
+              </CloseButton>
+              {currentPainting && (
+                <img
+                  src={currentPainting.images.gallery}
+                  alt={currentPainting.name}
+                />
+              )}
+            </GalleryContent>
+            <Overlay
+              isOpen={showGallery}
+              onClick={() => setShowGallery(false)}
+            />
+          </ShowGallery>
+        )}
       </Slide>
     </Container>
   );

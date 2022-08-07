@@ -21,7 +21,6 @@ const Container = styled.div`
     min-width: calc(${(props) => props.width}px - 48px);
   }
 `;
-
 const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -52,26 +51,6 @@ const Left = styled.div`
   @media screen and (max-width: 576px) {
     grid-template-columns: 0.5fr repeat(2, 1fr) 0.6fr;
     grid-template-rows: repeat(5, 1fr);
-  }
-`;
-
-const ArtistImage = styled.div`
-  grid-area: 7 / 8 / 9 / 10;
-  margin-left: 30px;
-  height: 128px;
-  width: 128px;
-  & img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  @media screen and (max-width: 992px) {
-    padding-left: 0;
-    grid-area: 3 / 4 / 4 / 5;
-  }
-  @media screen and (max-width: 576px) {
-    grid-area: 5 / 1 / 6 / 2;
-    margin-left: 0;
   }
 `;
 const Hero = styled.div`
@@ -143,7 +122,62 @@ const Title = styled.div`
     flex-direction: column;
   }
 `;
+const ArtistImage = styled.div`
+  grid-area: 7 / 8 / 9 / 10;
+  margin-left: 30px;
+  height: 128px;
+  width: 128px;
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 992px) {
+    padding-left: 0;
+    grid-area: 3 / 4 / 4 / 5;
+  }
+  @media screen and (max-width: 576px) {
+    grid-area: 5 / 1 / 6 / 2;
+    margin-left: 0;
+  }
+`;
+const ViewButton = styled.div`
+  grid-area: 7 / 1 / 8 / 3;
+  background: rgba(0, 0, 0, 0.75);
+  mix-blend-mode: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  height: 40px;
+  width: 152px;
+  column-gap: 14px;
+  padding: 16px 14px;
+  cursor: pointer;
 
+  @media screen and (max-width: 992px) {
+    grid-area: 4 / 1 / 8 / 3;
+  }
+  @media screen and (max-width: 576px) {
+    grid-area: 1/ 1 / 1 /2;
+  }
+`;
+const Button = styled.h3`
+  width: auto;
+  font-family: ${libreBaskervilleBold};
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  text-align: right;
+  letter-spacing: 2.14286px;
+  color: #ffffff;
+`;
+const Icone = styled.svg`
+  height: 12px;
+  width: 12px;
+`;
 const Right = styled.div`
   height: 100%;
   width: 45%;
@@ -209,7 +243,6 @@ const RightContent = styled.div`
     }
   }
 `;
-
 const Source = styled.a`
   grid-area: 14 / 1 / 15 / 2;
   height: auto;
@@ -233,7 +266,7 @@ const Source = styled.a`
   }
 `;
 
-function PaintingPage({ painting, counter }) {
+function PaintingPage({ painting, counter, id, setShowGallery }) {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
@@ -271,13 +304,40 @@ function PaintingPage({ painting, counter }) {
               alt={painting.name}
             />
           </Hero>
-          <ArtistImage>
-            <img src={painting.artist.image} alt={painting.name} />
-          </ArtistImage>
           <Title>
             <h1>{painting.name}</h1>
             <h3>{painting.artist.name}</h3>
           </Title>
+          <ArtistImage>
+            <img src={painting.artist.image} alt={painting.name} />
+          </ArtistImage>
+          <ViewButton onClick={() => setShowGallery(true)}>
+            <Icone
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.71431 0L9.21432 1.5L6.85718 3.85714L8.14288 5.14285L10.5 2.78571L12 4.28571V0H7.71431Z"
+                fill="white"
+              />
+              <path
+                d="M3.85714 6.85715L1.5 9.21429L0 7.71428V12H4.28571L2.78571 10.5L5.14285 8.14285L3.85714 6.85715Z"
+                fill="white"
+              />
+              <path
+                d="M8.14288 6.85715L6.85718 8.14285L9.21432 10.5L7.71431 12H12V7.71428L10.5 9.21429L8.14288 6.85715Z"
+                fill="white"
+              />
+              <path
+                d="M4.28571 0H0V4.28571L1.5 2.78571L3.85714 5.14285L5.14285 3.85714L2.78571 1.5L4.28571 0Z"
+                fill="white"
+              />
+            </Icone>
+            <Button>View image</Button>
+          </ViewButton>
         </Left>
         <Right>
           <RightContent>
