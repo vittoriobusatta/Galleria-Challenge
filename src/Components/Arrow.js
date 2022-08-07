@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as ArrowNext } from "../Assets/Icons/Icon-next-16.svg";
 import { ReactComponent as ArrowBack } from "../Assets/Icons/icon-back-button.svg";
@@ -18,6 +18,20 @@ const Container = styled.div`
 
 
 function Arrow({ direction, counter, setCounter, paintingsData }) {
+
+  useEffect(() => {
+    function checkKey(e) {
+      document.onkeydown = checkKey;
+      e = e || window.event;
+      if (e.keyCode === 37 && counter > 0) {
+        setCounter(counter - 1);
+      } else if (e.keyCode === 39 && counter < paintingsData.length - 1) {
+        setCounter(counter + 1);
+      }
+    }
+    document.onkeydown = checkKey;
+  }
+  , [counter, setCounter, paintingsData]);
 
   function handleClickBack() {
     if (counter > 0) {

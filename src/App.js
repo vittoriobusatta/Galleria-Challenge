@@ -17,17 +17,7 @@ const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar{
       display: none;
     }
-    ::-moz-selection {
-      background: #ECE2D0;
-      text-shadow: none;
-    }
-    ::selection {
-      background: #ECE2D0;
-      text-shadow: none;
-    }
-    /* @media only screen and (min-width : 1824px) {
-      font-size: 70%;
-    }  */
+ 
     @media screen and (max-width: 1400px) {
       font-size: 58%;
     }
@@ -52,7 +42,14 @@ const GlobalStyle = createGlobalStyle`
     background-color: #fff;
     font-size: 1.6rem;
   }
-
+  ::-moz-selection {
+    background: #FCDE9C;
+    text-shadow: none;
+  }
+  ::selection {
+    background: #FCDE9C;
+    text-shadow: none;
+  }
   
 `;
 

@@ -51,7 +51,7 @@ const Left = styled.div`
 
   @media screen and (max-width: 576px) {
     grid-template-columns: 0.5fr repeat(2, 1fr) 0.5fr;
-grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     /* max-height: 550px; */
   }
 `;
@@ -156,6 +156,7 @@ const Right = styled.div`
   }
   @media screen and (max-width: 992px) {
     max-height: fit-content;
+    width: 100%;
   }
 `;
 const RightContent = styled.div`
@@ -165,6 +166,18 @@ const RightContent = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr) 1.5fr repeat(10, 1fr);
 
+  @media screen and (max-width: 992px) {
+    width: 100%;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    margin-top: 64px;
+  }
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 0.6fr 0.5fr repeat(4, 1fr);
+    margin-top: 0;
+  }
+
   & h1 {
     grid-area: 1 / 1 / 4 / 2;
     font-style: normal;
@@ -172,6 +185,14 @@ const RightContent = styled.div`
     font-size: max(20rem, 100px);
     color: #f3f3f3;
     font-family: ${libreBaskervilleBold};
+    @media screen and (max-width: 992px) {
+      grid-area: 1 / 1 / 3 / 3;
+    }
+    @media screen and (max-width: 576px) {
+      grid-area: 1 / 2 / 3 / 3;
+      font-size: max(14rem, 56px);
+      text-align: center;
+    }
   }
   & p {
     grid-area: 5 / 1 / 13 / 2;
@@ -180,14 +201,13 @@ const RightContent = styled.div`
     font-size: 14px;
     line-height: 28px;
     color: #7d7d7d;
-    max-width: 350px;
     font-family: ${libreBaskervilleBold};
-  }
-
-  @media screen and (max-width: 992px) {
-    width: 100%;
-    height: fit-content;
-    display: block;
+    @media screen and (max-width: 992px) {
+      grid-area: 2 / 2 / 5 / 3;
+    }
+    @media screen and (max-width: 576px) {
+      grid-area: 2 / 1 / 6 / 3;
+    }
   }
 `;
 
@@ -204,6 +224,14 @@ const Source = styled.a`
   text-decoration-line: underline;
   color: #7d7d7d;
   text-transform: uppercase;
+  white-space: nowrap;
+  @media screen and (max-width: 992px) {
+    grid-area: 5 / 2 / 6 / 3;
+  }
+  @media screen and (max-width: 576px) {
+    grid-area: 6 / 1 / 7 / 2;
+    margin-top: 68px;
+  }
 `;
 
 function PaintingPage({ painting, counter }) {

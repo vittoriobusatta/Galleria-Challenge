@@ -120,19 +120,6 @@ function Slideshow({ paintingsData }) {
     );
   };
 
-  useEffect(() => {
-    function checkKey(e) {
-      document.onkeydown = checkKey;
-      e = e || window.event;
-      if (e.keyCode === 37 && counter > 0) {
-        setCounter(counter - 1);
-      } else if (e.keyCode === 39 && counter < paintingsData.length - 1) {
-        setCounter(counter + 1);
-      }
-    }
-    checkKey();
-  }, [counter]);
-
   return (
     <Container>
       <Slide>
