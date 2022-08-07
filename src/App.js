@@ -56,12 +56,15 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [paintingsData, setPaintingsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   function fetchPaintingsData() {
+    setIsLoading(true)
     axios
       .get("./Json/data.json")
       .then((res) => {
         setPaintingsData(res.data);
+      setIsLoading(false)
       })
       .catch((err) => {
         console.log(err);
@@ -70,12 +73,8 @@ function App() {
 
   useEffect(() => {
     fetchPaintingsData();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+  }, [])
 
-  const [isLoading, setIsLoading] = useState(true);
 
   return isLoading ? (
     <Loader />) 
