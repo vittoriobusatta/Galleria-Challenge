@@ -14,6 +14,12 @@ const Container = styled.div`
   @media screen and (max-width: 1224px) {
     min-width: calc(${(props) => props.width}px - 70px);
   }
+  @media screen and (max-width: 992px) {
+    min-width: calc(${(props) => props.width}px - 60px);
+  }
+  @media screen and (max-width: 576px) {
+    min-width: calc(${(props) => props.width}px - 48px);
+  }
 `;
 
 const Content = styled.div`
@@ -42,6 +48,12 @@ const Left = styled.div`
     grid-template-rows: repeat(4, 1fr);
     max-width: none;
   }
+
+  @media screen and (max-width: 576px) {
+    grid-template-columns: 0.5fr repeat(2, 1fr) 0.5fr;
+grid-template-rows: repeat(5, 1fr);
+    /* max-height: 550px; */
+  }
 `;
 
 const ArtistImage = styled.div`
@@ -55,9 +67,12 @@ const ArtistImage = styled.div`
     object-fit: cover;
   }
   @media screen and (max-width: 992px) {
-    /* margin-left: 0; */
     padding-left: 0;
     grid-area: 3 / 4 / 4 / 5;
+  }
+  @media screen and (max-width: 576px) {
+    grid-area: 5 / 1 / 6 / 2;
+    margin-left: 0;
   }
 `;
 const Hero = styled.div`
@@ -69,10 +84,14 @@ const Hero = styled.div`
     object-fit: cover;
   }
   @media screen and (max-width: 992px) {
-    /* min-width: 650px; */
     max-width: 600px;
     min-height: 560px;
     grid-area: 1 / 1 / 5 / 4;
+  }
+  @media screen and (max-width: 576px) {
+    grid-area: 1 / 1 / 5 / 5;
+    max-width: auto;
+    min-height: auto;
   }
 `;
 const Title = styled.div`
@@ -93,6 +112,12 @@ const Title = styled.div`
     @media screen and (max-width: 992px) {
       line-height: 56px;
     }
+    @media screen and (max-width: 576px) {
+      margin-bottom: 8px;
+      font-size: 24px;
+      line-height: 29px;
+      text-align: left;
+    }
   }
   & h3 {
     font-style: normal;
@@ -110,6 +135,14 @@ const Title = styled.div`
     grid-area: 1 / 2 / 3 / 5;
     padding-left: 6.5rem;
   }
+  @media screen and (max-width: 576px) {
+    grid-area: 4 / 1 / 5 / 4;
+    padding: 24px;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
 `;
 
 const Right = styled.div`
@@ -120,6 +153,9 @@ const Right = styled.div`
   justify-content: center;
   @media screen and (max-width: 1224px) {
     justify-content: flex-end;
+  }
+  @media screen and (max-width: 992px) {
+    max-height: fit-content;
   }
 `;
 const RightContent = styled.div`
@@ -194,8 +230,6 @@ function PaintingPage({ painting, counter }) {
   function ResizeImage(images, windowSize) {
     return windowSize.width >= 992 ? images.large : images.small;
   }
-
-
 
   return (
     <Container

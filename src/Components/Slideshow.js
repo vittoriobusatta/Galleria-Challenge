@@ -5,7 +5,6 @@ import Arrow from "./Arrow";
 import PaintingPage from "./PaintingPage";
 import { useLocation } from "react-router-dom";
 
-
 const Container = styled.section`
   height: calc(100% - 129px);
   /* overflow: hidden; */
@@ -23,6 +22,10 @@ const Slide = styled.div`
   @media screen and (max-width: 992px) {
     height: auto;
     margin-bottom: 96px;
+    padding: 30px 30px 0;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 24px 24px 0;
   }
 `;
 
@@ -98,13 +101,13 @@ function Slideshow({ paintingsData }) {
 
   const onTop = () => {
     window.scrollTo(0, 0, "smooth");
-  }
+  };
 
   useEffect(() => {
     setCurrentPainting(paintingsData[counter]);
     setTimeout(() => {
       onTop();
-    } , 400);
+    }, 400);
   }, [counter, paintingsData, routePath]);
 
   const ProgressBar = () => {
@@ -117,6 +120,18 @@ function Slideshow({ paintingsData }) {
     );
   };
 
+  useEffect(() => {
+    function checkKey(e) {
+      document.onkeydown = checkKey;
+      e = e || window.event;
+      if (e.keyCode === 37 && counter > 0) {
+        setCounter(counter - 1);
+      } else if (e.keyCode === 39 && counter < paintingsData.length - 1) {
+        setCounter(counter + 1);
+      }
+    }
+    checkKey();
+  }, [counter]);
 
   return (
     <Container>

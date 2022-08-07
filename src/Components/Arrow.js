@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as ArrowRight } from "../Assets/Icons/Icon-next-16.svg";
-import { ReactComponent as ArrowLeft } from "../Assets/Icons/icon-back-button.svg";
+import { ReactComponent as ArrowNext } from "../Assets/Icons/Icon-next-16.svg";
+import { ReactComponent as ArrowBack } from "../Assets/Icons/icon-back-button.svg";
 
 const Container = styled.div`
   height: auto;
@@ -10,31 +10,24 @@ const Container = styled.div`
   & svg {
     height: 24px;
     width: 25px;
+    & g {
+      transition: all 0.3s ease-in-out;
+    }
   }
 `;
-const ArrowNext = styled(ArrowRight)`
-  & g {
-    transition: all 0.3s ease-in-out;
-  }
-`;
-const ArrowBack = styled(ArrowLeft)`
-  & g {
-    transition: all 0.3s ease-in-out;
-  }
-`;
+
 
 function Arrow({ direction, counter, setCounter, paintingsData }) {
 
   function handleClickBack() {
     if (counter > 0) {
       setCounter(counter - 1);
-    };
+    }
   }
 
   function handleClickNext() {
-    if (counter < paintingsData.length - 1)  {
+    if (counter < paintingsData.length - 1) {
       setCounter(counter + 1);
-
     }
   }
 
@@ -44,7 +37,6 @@ function Arrow({ direction, counter, setCounter, paintingsData }) {
   }
 
   return (
-
     <Container onClick={handleClick}>
       {direction === "next" ? <ArrowNext /> : <ArrowBack />}
     </Container>
