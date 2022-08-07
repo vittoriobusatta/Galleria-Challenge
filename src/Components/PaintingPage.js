@@ -50,9 +50,8 @@ const Left = styled.div`
   }
 
   @media screen and (max-width: 576px) {
-    grid-template-columns: 0.5fr repeat(2, 1fr) 0.5fr;
+    grid-template-columns: 0.5fr repeat(2, 1fr) 0.6fr;
     grid-template-rows: repeat(5, 1fr);
-    /* max-height: 550px; */
   }
 `;
 
@@ -227,10 +226,10 @@ const Source = styled.a`
   white-space: nowrap;
   @media screen and (max-width: 992px) {
     grid-area: 5 / 2 / 6 / 3;
+    margin-top: 68px;
   }
   @media screen and (max-width: 576px) {
     grid-area: 6 / 1 / 7 / 2;
-    margin-top: 68px;
   }
 `;
 

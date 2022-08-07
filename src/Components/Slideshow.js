@@ -21,7 +21,7 @@ const Slide = styled.div`
   }
   @media screen and (max-width: 992px) {
     height: auto;
-    margin-bottom: 96px;
+    margin-bottom: 120px;
     padding: 30px 30px 0;
   }
   @media screen and (max-width: 576px) {
@@ -36,7 +36,7 @@ const SlideContent = styled.div`
   overflow: hidden;
 `;
 
-const SlideFooter = styled.div`
+const SlideFooter = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -50,6 +50,11 @@ const SlideFooter = styled.div`
   align-items: center;
   border-top: solid 1px #c1c1c1;
   user-select: none;
+
+  @media screen and (max-width: 576px) {
+    padding: 24px 24px;
+    column-gap: 5px;
+  }
 `;
 
 const Info = styled.div`
@@ -63,6 +68,9 @@ const Info = styled.div`
     color: #000000;
     margin-bottom: 8px;
     font-family: ${libreBaskervilleBold};
+    @media screen and (max-width: 576px) {
+      font-size: 14px;
+    }
   }
   & h3 {
     font-style: normal;
@@ -73,6 +81,9 @@ const Info = styled.div`
     mix-blend-mode: normal;
     opacity: 0.75;
     font-family: ${libreBaskervilleBold};
+    @media screen and (max-width: 576px) {
+      font-size: 10px;
+    }
   }
 `;
 
